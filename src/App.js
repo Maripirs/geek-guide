@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import "./App.css";
+import data from "./dummydata";
+import HomePage from "./HomePage";
+import GamePage from "./GamePage";
+import Nav from "./Components/Nav";
+import { Link } from "react-router-dom";
+import {
+	BrowserRouter as Router,
+	Route,
+	Routes,
+	useParams,
+} from "react-router-dom";
+function App(params) {
+	const [selectedGame, setSelectedGame] = useState(null);
+	const [checked, setChecked] = useState(false);
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const handleDrawer = () => {
+		setChecked(!checked);
+	};
+
+	const handleSelectGame = (e) => {
+		setSelectedGame(e.target.closest("li").id);
+	};
+
+	return (
+		<div className="App">
+			<Nav name={selectedGame} />
+			<main>
+				<Routes>
+					<Route
+						path="/"
+						element={<HomePage setSelectedGame={setSelectedGame} />}
+					/>
+					<Route path="/:name" element={<GamePage />} />
+				</Routes>
+			</main>
+		</div>
+	);
 }
 
 export default App;
