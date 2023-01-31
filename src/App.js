@@ -1,38 +1,44 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import data from "./dummydata";
 import HomePage from "./HomePage";
 import GamePage from "./GamePage";
-import Nav from "./Components/Nav";
-import { Link } from "react-router-dom";
-import {
-	BrowserRouter as Router,
-	Route,
-	Routes,
-	useParams,
-} from "react-router-dom";
-function App(params) {
+import Nav from "./Components/Nav2";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+function App() {
 	const [selectedGame, setSelectedGame] = useState(null);
-	const [checked, setChecked] = useState(false);
-
-	const handleDrawer = () => {
-		setChecked(!checked);
+	const [games, setGames] = useState([]);
+	const fetchGames = () => {
+		fetch("http://localhost:8000/api/games/")
+			.then((r) => r.json())
+			.then((r) => {
+				setGames(r);
+			})
+			.catch(console.error);
 	};
-
-	const handleSelectGame = (e) => {
-		setSelectedGame(e.target.closest("li").id);
-	};
+	useEffect(() => {
+		fetchGames();
+	}, []);
 
 	return (
 		<div className="App">
-			<Nav name={selectedGame} />
+			<Nav
+				selectedGame={selectedGame}
+				setSelectedGame={setSelectedGame}
+				games={games}
+			/>
 			<main>
 				<Routes>
+					<Route path="/" element={<HomePage games={games} />} />
 					<Route
-						path="/"
-						element={<HomePage setSelectedGame={setSelectedGame} />}
+						path="/:name"
+						element={
+							<GamePage
+								setSelectedGame={setSelectedGame}
+								selectedGame={selectedGame}
+								games={games}
+							/>
+						}
 					/>
-					<Route path="/:name" element={<GamePage />} />
 				</Routes>
 			</main>
 		</div>

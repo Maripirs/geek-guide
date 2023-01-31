@@ -1,12 +1,14 @@
 import { useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import data from "../dummydata";
-const Nav = (params, props) => {
-	const [drawerOpen, setDrawerOpen] = useState(false);
-	const { name } = useParams();
+import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 
+const Nav = (props) => {
+	const [drawerOpen, setDrawerOpen] = useState(false);
 	return (
-		<div className="drawer drawer-start h-screen w-screen absolute z-40">
+		<div
+			className="drawer drawer-start h-20 w-screen absolute z-40 fixed top-0 left-0 right-0"
+			style={{ overflow: "visible" }}
+		>
 			<input
 				id="my-drawer-4"
 				type="checkbox"
@@ -14,8 +16,8 @@ const Nav = (params, props) => {
 				checked={drawerOpen}
 				onChange={() => {}}
 			/>
-			<div className="drawer-content">
-				<div className="navbar bg-base-100">
+			<div className="drawer-content h-fit " style={{ overflow: "visible" }}>
+				<div className="navbar bg-base-100 fixed top-0 left-0 right-0">
 					<div className="flex-1">
 						<button
 							className="btn btn-ghost normal-case text-xl"
@@ -38,11 +40,11 @@ const Nav = (params, props) => {
 						</button>
 					</div>
 					<div className="flex-none">
-						{name ? (
+						{props.selectedGame ? (
 							<ul className="menu menu-horizontal px-1">
 								<li tabIndex={0}>
 									<a>
-										{props.name}
+										{props.selectedGame.name}
 										<svg
 											className="fill-current"
 											xmlns="http://www.w3.org/2000/svg"
@@ -54,12 +56,13 @@ const Nav = (params, props) => {
 										</svg>
 									</a>
 									<ul className="p-2 bg-base-100">
-										<li>
-											<a>Submenu 1</a>
-										</li>
-										<li>
-											<a>Submenu 2</a>
-										</li>
+										{props.selectedGame.sections.map((section) => (
+											<li>
+												<HashLink to={"#" + section.hashid}>
+													{section.type}
+												</HashLink>
+											</li>
+										))}
 									</ul>
 								</li>
 							</ul>
@@ -69,21 +72,33 @@ const Nav = (params, props) => {
 					</div>
 				</div>
 			</div>
-			<div className="drawer-side">
+			<div
+				className="drawer-side h-screen"
+				style={{ display: drawerOpen ? "" : "none" }}
+			>
 				<label
 					htmlFor="my-drawer-4"
 					className="drawer-overlay"
 					onClick={() => setDrawerOpen(false)}
 				></label>
 				<ul className="menu p-4 w-80 bg-base-100 text-base-content ">
-					{data.map((game) => {
+					{props.games.map((game) => {
 						return (
 							<li
 								key={game.name}
 								id={game.name}
 								onClick={() => setDrawerOpen(false)}
 							>
-								<Link to={"/" + game.name}>{game.name}</Link>
+								<Link to={"/" + game.name}>
+									<div className="card card-side w-xs shadow-xl mx-8 my-4">
+										<figure className="w-16">
+											<img src={game.image} alt={game.name + "cover"} />
+										</figure>
+										<div className="card-body">
+											<h3>{game.name}</h3>
+										</div>
+									</div>
+								</Link>
 							</li>
 						);
 					})}
