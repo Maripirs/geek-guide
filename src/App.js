@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+
 import HomePage from "./HomePage";
 import GamePage from "./GamePage";
 import Nav from "./Components/Nav2";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 function App() {
 	const [selectedGame, setSelectedGame] = useState(null);
 	const [games, setGames] = useState([]);
 	const fetchGames = () => {
-		fetch("http://localhost:8000/api/games/")
+		fetch("http://127.0.0.1:8000/api/games/")
 			.then((r) => r.json())
 			.then((r) => {
 				setGames(r);

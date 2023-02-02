@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 const HomePage = (props) => {
 	const [search, setSearch] = useState("");
@@ -6,16 +6,11 @@ const HomePage = (props) => {
 
 	const searchGames = (e) => {
 		setSearch(e.target.value);
-		let filtered = [];
-		for (let i = 0; i < props.games.length; i++) {
-			if (
-				props.games[i].displayName
-					.toLowerCase()
-					.includes(e.target.value.toLowerCase())
-			) {
-				filtered.push(props.games[i]);
-			}
-		}
+		let filtered = props.games.filter((game) => {
+			return game.displayName
+				.toLowerCase()
+				.includes(e.target.value.toLowerCase());
+		});
 		setSearchResult(filtered);
 	};
 

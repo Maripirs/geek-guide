@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 const Nav = (props) => {
 	const [drawerOpen, setDrawerOpen] = useState(false);
@@ -8,16 +8,11 @@ const Nav = (props) => {
 
 	const searchGames = (e) => {
 		setSearch(e.target.value);
-		let filtered = [];
-		for (let i = 0; i < props.games.length; i++) {
-			if (
-				props.games[i].displayName
-					.toLowerCase()
-					.includes(e.target.value.toLowerCase())
-			) {
-				filtered.push(props.games[i]);
-			}
-		}
+		let filtered = props.games.filter((game) => {
+			return game.displayName
+				.toLowerCase()
+				.includes(e.target.value.toLowerCase());
+		});
 		setSearchResult(filtered);
 	};
 	return (
@@ -65,10 +60,10 @@ const Nav = (props) => {
 								</label>
 								<ul
 									tabIndex={0}
-									className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+									className="dropdown-content menu p-2 shadow bg-base-200 rounded-box w-52 bg-neutral"
 								>
 									{props.selectedGame.sections.map((section) => (
-										<li>
+										<li key={section.type}>
 											<HashLink to={"#" + section.hashid}>
 												{section.type}
 											</HashLink>
@@ -85,36 +80,39 @@ const Nav = (props) => {
 
 			<div
 				className={
-					"h-screen absolute top-0 z-50 flex flex-row transition-transform " +
+					"h-screen fixed top-0 z-50 flex flex-row transition-transform " +
 					(drawerOpen ? "w-screen" : "-translate-x-80 w-80")
 				}
 			>
 				<ul className="menu h-screen p-4 w-80 bg-base-100 text-base-content z-50">
-					<Link
-						to="/"
-						onClick={() => {
-							props.setSelectedGame(null);
-							setDrawerOpen(false);
-						}}
-					>
-						<div className="nav-top flex flex-row justify-between">
+					<div className="nav-top flex flex-row justify-between">
+						<Link
+							to="/"
+							onClick={() => {
+								props.setSelectedGame(null);
+								setDrawerOpen(false);
+							}}
+						>
 							<h3>GeekGuide</h3>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 24 24"
-								strokeWidth={1.5}
-								stroke="currentColor"
-								className="w-6 h-6"
-							>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
-								/>
-							</svg>
-						</div>
-					</Link>
+						</Link>
+						<svg
+							onClick={() => {
+								setDrawerOpen(false);
+							}}
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							strokeWidth={1.5}
+							stroke="currentColor"
+							className="w-6 h-6"
+						>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+							/>
+						</svg>
+					</div>
 					<div className="divider"></div>
 
 					<div className="form-control">
@@ -155,7 +153,7 @@ const Nav = (props) => {
 									}}
 								>
 									<div
-										className="card card-side bg-neutralhover w-xs shadow-md my-1 hover:bg-neutral-focus active:bg-primary"
+										className="card card-side w-xs shadow-md my-1 hover:bg-neutral-focus active:bg-primary"
 										style={{ borderRadius: "5px" }}
 									>
 										<figure className="w-16 rounded-none">
@@ -171,7 +169,8 @@ const Nav = (props) => {
 					})}
 				</ul>
 				<div
-					className=" bg-black w-0 opacity-40 grow cursor-pointer z-50"
+					className=" bg-black w-0 opacity-40 grow cursor-pointer z-40"
+					style={{ transitionDuration: "0s" }}
 					onClick={() => {
 						setDrawerOpen(false);
 						setSearch("");

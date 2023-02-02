@@ -2,6 +2,17 @@ module.exports = {
 	content: ["./src/**/*.{html,js}"],
 	theme: {
 		extend: {},
+		fontSize: {
+			xs: ".6rem",
+			sm: ".7rem",
+			base: ".8rem",
+			lg: "1rem",
+			xl: "1.1rem",
+			"2xl": "1.2rem",
+			"3xl": "1.3rem",
+			"4xl": "1.4rem",
+			"5xl": "1.5rem",
+		},
 	},
 	plugins: [require("daisyui")],
 	daisyui: {
@@ -9,7 +20,7 @@ module.exports = {
 		themes: [
 			{
 				geek: {
-					primary: "#2563eb",
+					primary: "#B6B2D3",
 
 					secondary: "#60a5fa",
 

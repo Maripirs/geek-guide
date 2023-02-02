@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import ContentCard from "./Components/ContentCard";
 
 const GamePage = (props, params) => {
 	const { name } = useParams();
 
 	const fetchGame = () => {
-		fetch(`http://localhost:8000/api/game/${name}`)
+		fetch(`http://127.0.0.1:8000/api/game/${name}`)
 			.then((r) => r.json())
 			.then((r) => {
 				props.setSelectedGame(r);
@@ -22,33 +23,42 @@ const GamePage = (props, params) => {
 	}, [name]);
 
 	const cardInfo = [
-		{ field: "Year", value: "props.selectedGame.year" },
-		{ field: "Players", value: "props.selectedGame.players" },
-		{ field: "Playing Time", value: "props.selectedGame.playingTime" },
+		{ field: "Year", value: "year" },
+		{ field: "Players", value: "players" },
+		{ field: "Playing Time", value: "playingTime" },
 	];
 
 	return props.selectedGame ? (
 		<>
 			<div className="navbar bg-base-100"></div>
 			<div className="flex flex-col items-center">
-				<div className="card card-side bg-neutral bg-base-100 shadow-xl mx-8 mb-8 max-w-xl">
+				<div className="card card-side bg-neutral bg-base-100 shadow-xl mx-8 mb-8 w-11/12 md:w-2/3">
 					<figure>
 						<img
-							className="w-16 sm:w-32 lg:w-96"
+							className="h-48 sm:h-[16.5rem] w-max-[60%]"
 							src={props.selectedGame.image}
 							alt={props.selectedGame.name + "cover"}
 						/>
 					</figure>
-					<div className="card-body">
-						<h2 className="card-title ">{props.selectedGame.displayName}</h2>
+					<div className="card-body p-3 sm:p-6 gap-0 sm:gap-1">
+						<h2 className="card-title text-lg sm:text-2xl font-bold">
+							{props.selectedGame.displayName}
+						</h2>
 						{cardInfo.map((item) => (
-							<div className="stat px-0 py-1" key={item.field}>
-								<div className="stat-title text-sm">{item.field}</div>
-								<div className="stat-value text-lg">{eval(item.value)}</div>
+							<div className="stat px-0 py-1 " key={item.field}>
+								<div className="stat-title text-xs sm:text-base">
+									{item.field}
+								</div>
+								<div className="stat-value text-sm sm:text-lg leading-5">
+									{props.selectedGame[item.value]}
+								</div>
 							</div>
 						))}
 
-						<a className="link" href={props.selectedGame.bgg}>
+						<a
+							className="link text-sm sm:text-xl"
+							href={props.selectedGame.bgg}
+						>
 							BGG Site
 						</a>
 					</div>
@@ -56,45 +66,42 @@ const GamePage = (props, params) => {
 				<div className="sections">
 					{props.selectedGame.sections.map((section, i) => (
 						<div
-							className="section flex flex-col items-center w-full"
+							className="section flex flex-col items-center w-screen"
 							key={i}
 							id={section.hashid}
 						>
 							<div className="navbar bg-base-100"></div>
-							<div className="grid h-20 card bg-base-300 rounded-box place-items-center m-4 w-11/12">
-								{section.type}
+							<div className="grid h-12 sm:h-[4.5rem] card bg-base-300 rounded-box place-items-center m-4 w-11/12 overflow-hidden">
+								<div className="z-10 font-bold text-xl">{section.type}</div>
+								{props.selectedGame.banner && (
+									<>
+										<div className="over-banner bg-base-100"></div>
+										<img
+											className="section-banner min-h-24 h-auto w-auto min-w-[105%] sm:-bottom-4 md:-bottom-4 lg:-bottom-10 rotate-5 sm:rotate-3 md:rotate-1"
+											src={props.selectedGame.banner}
+											alt={props.selectedGame + " banner"}
+										/>
+									</>
+								)}
 							</div>
 
-							{section.type === "Icon Legend" ? (
-								<div className="legends flex flex-row flex-wrap">
-									{section.legends.map((legend, i) => (
-										<div key={i} className="card card-side shadow-xl mx-8 my-4">
-											<figure className="w-20 flex-shrink-0">
-												<img src={legend.image} alt={legend.name + "cover"} />
-											</figure>
-											<div className="card-body">
-												<h3>{legend.name}</h3>
-
-												<p> {legend.description}</p>
-											</div>
-										</div>
-									))}
-								</div>
-							) : (
-								<>
-									<div className="content flex flex-col mx-8 md:w-96 ">
-										{section.content.map((cont) => (
-											<div className="my-1">
-												<span className="text-2xl">&#x2022;</span> {cont}
-											</div>
-										))}
-									</div>
-								</>
-							)}
+							<div
+								className={
+									"flex justify-center items-center w-full " +
+									(section.type === "Icon Legend"
+										? "flex-row flex-wrap "
+										: "flex-col")
+								}
+							>
+								{section.contents.map((content, i) => (
+									<ContentCard key={i} content={content} />
+								))}
+							</div>
 						</div>
 					))}
 				</div>
 			</div>
+			<div className="navbar bg-base-100"></div>
 		</>
 	) : (
 		"loading"

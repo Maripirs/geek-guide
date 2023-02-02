@@ -1,0 +1,26 @@
+* {
+	overscroll-behavior: none;
+}
+.extended {
+	height: 0;
+	overflow: hidden;
+}
+
+.expanded .extended {
+	height: fit-content;
+}
+
+.section-banner {
+	position: absolute;
+	transform: rotate(-2deg);
+	opacity: 0.5;
+}
+
+.over-banner {
+	z-index: 5;
+	position: absolute;
+	width: calc(100% - 1rem);
+	height: calc(100% - 1rem);
+	border-radius: inherit;
+	opacity: 0.8;
+}

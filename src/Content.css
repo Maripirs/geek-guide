@@ -1,0 +1,8 @@
+.extended {
+	height: 0;
+	overflow: hidden;
+}
+
+.expanded-toggle:checked ~ .extended {
+	background-color: blue;
+}
