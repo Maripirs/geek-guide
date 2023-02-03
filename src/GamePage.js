@@ -77,7 +77,7 @@ const GamePage = (props, params) => {
 									<>
 										<div className="over-banner bg-base-100"></div>
 										<img
-											className="section-banner min-h-24 h-auto w-auto min-w-[105%] sm:-bottom-4 md:-bottom-4 lg:-bottom-10 rotate-5 sm:rotate-3 md:rotate-1"
+											className="section-banner min-h-24 h-auto w-auto min-w-[105%] sm:-bottom-4 md:-bottom-4 lg:-bottom-4"
 											src={props.selectedGame.banner}
 											alt={props.selectedGame + " banner"}
 										/>

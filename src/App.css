@@ -12,7 +12,6 @@
 
 .section-banner {
 	position: absolute;
-	transform: rotate(-2deg);
 	opacity: 0.5;
 }
 

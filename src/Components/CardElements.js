@@ -70,7 +70,7 @@ const ExtLegend = (props) => {
 	return (
 		<div className="extended_contents px-3 flex flex-row gap-3 items-center">
 			<div className="w-14 shrink-0">
-				<img src={props.extended.image} alt={props.extended.name + "icon"} />
+				<img src={props.extended.image} alt={"icon"} />
 			</div>
 			<div className="text-xs sm:text-lg">{props.extended.text}</div>
 		</div>
