@@ -4,7 +4,6 @@ import ContentCard from "./Components/ContentCard";
 
 const GamePage = (props, params) => {
 	const { name } = useParams();
-
 	const fetchGame = () => {
 		fetch(`https://geek-guide.herokuapp.com/api/game/${name}`)
 			.then((r) => r.json())
