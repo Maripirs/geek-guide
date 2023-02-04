@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ContentCard from "./Components/ContentCard";
 
+
 const GamePage = (props, params) => {
 	const { name } = useParams();
 	const fetchGame = () => {
