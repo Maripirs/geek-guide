@@ -9,7 +9,7 @@ function App() {
 	const [selectedGame, setSelectedGame] = useState(null);
 	const [games, setGames] = useState([]);
 	const fetchGames = () => {
-		fetch("https://geek-guide.herokuapp.com//api/games/")
+		fetch("https://geek-guide.herokuapp.com/api/games/")
 			.then((r) => r.json())
 			.then((r) => {
 				setGames(r);
@@ -29,9 +29,9 @@ function App() {
 			/>
 			<main>
 				<Routes>
-					<Route path="/" element={<HomePage games={games} />} />
+					<Route path="/geek-guide/" element={<HomePage games={games} />} />
 					<Route
-						path="/:name"
+						path="/geek-guide/:name"
 						element={
 							<GamePage
 								setSelectedGame={setSelectedGame}
