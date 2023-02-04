@@ -9,7 +9,7 @@ function App() {
 	const [selectedGame, setSelectedGame] = useState(null);
 	const [games, setGames] = useState([]);
 	const fetchGames = () => {
-		fetch("http://127.0.0.1:8000/api/games/")
+		fetch("https://geek-guide.herokuapp.com//api/games/")
 			.then((r) => r.json())
 			.then((r) => {
 				setGames(r);

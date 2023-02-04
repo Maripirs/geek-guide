@@ -6,7 +6,7 @@ const GamePage = (props, params) => {
 	const { name } = useParams();
 
 	const fetchGame = () => {
-		fetch(`http://127.0.0.1:8000/api/game/${name}`)
+		fetch(`https://geek-guide.herokuapp.com/api/game/${name}`)
 			.then((r) => r.json())
 			.then((r) => {
 				props.setSelectedGame(r);
