@@ -20,6 +20,7 @@ function App() {
 		fetchGames();
 	}, []);
 
+	
 	return (
 		<div className="App">
 			<Nav
