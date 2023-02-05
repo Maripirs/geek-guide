@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/geek-guide/static/css/main.2379112e.css",
-    "main.js": "/geek-guide/static/js/main.0555dca6.js",
+    "main.js": "/geek-guide/static/js/main.41fca5dd.js",
     "index.html": "/geek-guide/index.html",
     "main.2379112e.css.map": "/geek-guide/static/css/main.2379112e.css.map",
-    "main.0555dca6.js.map": "/geek-guide/static/js/main.0555dca6.js.map"
+    "main.41fca5dd.js.map": "/geek-guide/static/js/main.41fca5dd.js.map"
   },
   "entrypoints": [
     "static/css/main.2379112e.css",
-    "static/js/main.0555dca6.js"
+    "static/js/main.41fca5dd.js"
   ]
 }
