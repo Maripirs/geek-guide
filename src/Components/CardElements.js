@@ -1,5 +1,4 @@
 const handleClick = (e) => {
-	console.log(e.target.closest(".card"));
 	e.target.closest(".card").classList.toggle("expanded");
 };
 const ContLegend = (props) => {
