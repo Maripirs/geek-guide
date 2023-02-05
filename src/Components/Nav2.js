@@ -87,7 +87,7 @@ const Nav = (props) => {
 				<ul className="menu h-screen p-4 w-80 bg-base-100 text-base-content z-50">
 					<div className="nav-top flex flex-row justify-between">
 						<Link
-							to="/"
+							to="/geek-guide"
 							onClick={() => {
 								props.setSelectedGame(null);
 								setDrawerOpen(false);
