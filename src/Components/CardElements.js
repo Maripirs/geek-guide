@@ -93,7 +93,7 @@ const ExtExample = (props) => {
 			className={
 				"extended_contents p-3 flex  gap-3 " +
 				props.extended.direction +
-				" md:flex-row"
+				" xl:flex-row"
 			}
 		>
 			<div

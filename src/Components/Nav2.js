@@ -144,7 +144,7 @@ const Nav = (props) => {
 					{}
 					{(search.length > 0 ? searchResult : props.games).map((game) => {
 						return (
-							<Link to={"/" + game.name} key={game.name}>
+							<Link to={"/geek-guide/" + game.name} key={game.name}>
 								<li
 									onClick={() => {
 										setDrawerOpen(false);
