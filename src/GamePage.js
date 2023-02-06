@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ContentCard from "./Components/ContentCard";
 
-const GamePage = (props, params) => {
+const GamePage = (props) => {
 	const { name } = useParams();
 	const fetchGame = () => {
 		fetch(`https://geek-guide.herokuapp.com/api/game/${name}`)
@@ -34,7 +34,7 @@ const GamePage = (props, params) => {
 				<div className="card card-side bg-neutral bg-base-100 shadow-xl mx-8 mb-8 w-11/12 md:w-2/3">
 					<figure>
 						<img
-							className="h-48 sm:h-[16.5rem] w-max-[40%]"
+							className="h-48 sm:h-[16.5rem] max-w-[40%]"
 							src={props.selectedGame.image}
 							alt={props.selectedGame.name + "cover"}
 						/>
@@ -76,7 +76,7 @@ const GamePage = (props, params) => {
 									<>
 										<div className="over-banner bg-base-100"></div>
 										<img
-											className="section-banner min-h-24 min-w-full -bottom-2"
+											className="section-banner min-h-24 min-w-full "
 											src={props.selectedGame.banner}
 											alt={props.selectedGame + " banner"}
 										/>
