@@ -1,6 +1,6 @@
 # ♟ Geek Guide ♟
 ##### By Maripi 
-###### [Live Site](https://maripirs.github.io/geek-guide)
+Live site down. Will redeploy soon
 
 ##  Getting Started 
 Welcome to Geek Guide. User can choose any of the available games <br>
